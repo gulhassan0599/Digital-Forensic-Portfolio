@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // 1. Initialize AOS Animation
     AOS.init({
         duration: 800,
@@ -28,10 +28,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 3. Smooth Scrolling for Nav Links & Back to Top
     document.querySelectorAll('a.nav-link').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
+        anchor.addEventListener('click', function (e) {
             if (this.hash !== "") {
                 const targetElement = document.querySelector(this.hash);
-                
+
                 // If the target element exists on the current page, smooth scroll to it
                 if (targetElement && (this.pathname === window.location.pathname || this.pathname === '/')) {
                     e.preventDefault();
@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         top: targetElement.offsetTop - navHeight,
                         behavior: 'smooth'
                     });
-                    
+
                     // Close mobile menu if open
                     const navbarCollapse = document.querySelector('.navbar-collapse');
                     if (navbarCollapse.classList.contains('show')) {
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    if(backToTopBtn) {
+    if (backToTopBtn) {
         backToTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const navHeight = document.querySelector('.navbar').offsetHeight;
-            
+
             if (window.scrollY >= (sectionTop - navHeight - 100)) {
                 current = section.getAttribute('id');
             }
@@ -126,12 +126,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const counterSection = document.getElementById('statistics');
     if (counterSection) {
         const observer = new IntersectionObserver((entries) => {
-            if(entries[0].isIntersecting && !hasCounted) {
+            if (entries[0].isIntersecting && !hasCounted) {
                 runCounters();
                 hasCounted = true;
             }
         }, { threshold: 0.5 });
-        
+
         observer.observe(counterSection);
     }
 
@@ -139,64 +139,60 @@ document.addEventListener("DOMContentLoaded", () => {
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
 
-    if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            // Basic Validation
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+    // Helper function to display alert messages
+    function showMessage(msg, type) {
+        if (formMessage) {
+            formMessage.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
+            ${msg}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>`;
+            setTimeout(() => {
+                formMessage.innerHTML = '';
+            }, 5000);
+        }
+    }
 
-            if(!name || !email || !message) {
+    if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const nameInput = document.getElementById('name');
+            const emailInput = document.getElementById('email');
+            const messageInput = document.getElementById('message');
+            const subjectInput = document.getElementById('subject');
+
+            if (!nameInput.value || !emailInput.value || !messageInput.value) {
                 showMessage('Please fill all required fields.', 'danger');
                 return;
             }
 
-            // UI Feedback
             const submitBtn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
             submitBtn.disabled = true;
 
-            // TODO: Replace 'YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', 'YOUR_PUBLIC_KEY' 
-            // with actual EmailJS keys in the HTML or below
-            
-            /* Uncomment and configure EmailJS below:
-            emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)
-                .then(function() {
-                    showMessage('Message sent successfully! I will get back to you soon.', 'success');
+            emailjs.sendForm('service_jhayhmj', 'template_lfmo6qg', contactForm, 'QsaPmbCfE48kiipiD')
+                .then(function () {
+                    // Clear the form FIRST before triggering UI updates
                     contactForm.reset();
-                    submitBtn.innerHTML = originalBtnText;
-                    submitBtn.disabled = false;
-                }, function(error) {
+
+                    if (nameInput) nameInput.value = '';
+                    if (emailInput) emailInput.value = '';
+                    if (subjectInput) subjectInput.value = '';
+                    if (messageInput) messageInput.value = '';
+
+                    // Show success message without crashing
+                    showMessage('Message sent successfully!', 'success');
+                })
+                .catch(function (error) {
                     showMessage('Failed to send message. Please try again later.', 'danger');
                     console.error('EmailJS Error:', error);
+                })
+                .finally(function () {
                     submitBtn.innerHTML = originalBtnText;
                     submitBtn.disabled = false;
                 });
-            */
-            
-            // Placeholder logic (since EmailJS keys aren't provided yet)
-            setTimeout(() => {
-                showMessage('Message sent successfully! (Note: Configure EmailJS keys in index.html to make it work)', 'success');
-                contactForm.reset();
-                submitBtn.innerHTML = originalBtnText;
-                submitBtn.disabled = false;
-            }, 1500);
         });
-    }
-
-    function showMessage(msg, type) {
-        if(formMessage) {
-            formMessage.innerHTML = `<div class="alert alert-${type} alert-dismissible fade show" role="alert">
-                ${msg}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>`;
-            setTimeout(() => {
-                formMessage.innerHTML = '';
-            }, 5000);
-        }
     }
 
     // 7. Particles.js Initialization
