@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Digital Evidence Preservation Best Practices | DFIR Blog</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top scrolled">
+      <div class="container-fluid px-4 px-lg-5">
+        <a class="navbar-brand" href="../index.html">
+          <i class="bi bi-shield-lock"></i> Gul Hassan
+        </a>
+        <div class="d-none d-lg-block">
+          <a href="../blogs.html" class="btn btn-sm btn-outline-custom"
+            ><i class="bi bi-arrow-left"></i> Back to Portfolio</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <section class="mt-5 pt-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="mb-4">
+              <span class="badge bg-info text-dark mb-2">Methodology</span>
+              <h1 class="fw-bold mb-3">
+                Digital Evidence Preservation Best Practices
+              </h1>
+              <div class="d-flex text-secondary small gap-3">
+                <span><i class="bi bi-calendar3"></i> Oct 12, 2024</span>
+                <span><i class="bi bi-clock"></i> 5 min read</span>
+              </div>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1589254065878-42c9da997008?auto=format&fit=crop&w=1200&q=80"
+              class="img-fluid rounded mb-5"
+              alt="Blog Header"
+              style="max-height: 500px; width: 100%; object-fit: cover"
+            />
+
+            <div
+              class="text-secondary"
+              style="font-size: 1.1rem; line-height: 1.8"
+            >
+              <p class="text-white">
+                When dealing with cyber incidents or legal matters, digital
+                evidence is notoriously fragile. The way a device is handled
+                from the moment an incident is suspected can completely make or
+                break an investigation.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">1. Secure the Scene</h4>
+              <p>
+                The first rule of digital evidence preservation is physical
+                security. Ensure that unauthorized personnel cannot access the
+                systems in question. If a computer is powered on, leave it on.
+                Pulling the plug prematurely can destroy volatile memory (RAM)
+                which might contain encryption keys, running malware, or active
+                network connections.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">2. Document Everything</h4>
+              <p>
+                Before touching any keyboard or mouse, photograph the scene.
+                Document what is on the screen, the state of the hardware,
+                attached peripherals, and cables. This documentation forms the
+                foundation of your forensic report.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">3. Use Write Blockers</h4>
+              <p>
+                Never connect suspect media directly to a forensic workstation
+                without a hardware or software write blocker. Even mounting a
+                drive in Windows can alter timestamps and create system volume
+                information folders, tainting the evidence.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">4. Create Bit-Stream Images</h4>
+              <p>
+                Forensic investigators do not work on original evidence. Create
+                a sector-by-sector copy (bit-stream image) of the storage media
+                using tools like FTK Imager or DD. Always verify the image
+                creation using cryptographic hashes (MD5 or SHA-256).
+              </p>
+
+              <div
+                class="bg-dark bg-opacity-50 p-4 border-start border-info border-4 my-5 rounded-end"
+              >
+                <i class="bi bi-quote fs-1 text-info opacity-50"></i>
+                <p class="fst-italic">
+                  "If you didn't hash it, you can't prove you didn't change it."
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="footer text-center mt-5 pt-5 border-top"
+      style="border-color: rgba(255, 255, 255, 0.1) !important"
+    >
+      <div class="container">
+        <p class="text-secondary small mb-0">
+          &copy; <span id="year"></span> Gul Hassan. All Rights Reserved.
+        </p>
+        <script>
+          document.getElementById("year").textContent =
+            new Date().getFullYear();
+        </script>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>

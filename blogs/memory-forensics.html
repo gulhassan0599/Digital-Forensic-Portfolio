@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Introduction to Memory Forensics | DFIR Blog</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/style.css" />
+  </head>
+  <body class="bg-dark">
+    <nav class="navbar navbar-expand-lg fixed-top scrolled">
+      <div class="container-fluid px-4 px-lg-5">
+        <a class="navbar-brand" href="../index.html">
+          <i class="bi bi-shield-lock"></i> Gul Hassan
+        </a>
+        <div class="d-none d-lg-block">
+          <a href="../blogs.html" class="btn btn-sm btn-outline-custom"
+            ><i class="bi bi-arrow-left"></i> Back to Portfolio</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <section class="mt-5 pt-5">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8" data-aos="fade-up">
+            <div class="mb-4">
+              <span class="badge bg-info text-dark mb-2">Technical</span>
+              <h1 class="fw-bold mb-3">Introduction to Memory Forensics</h1>
+              <div class="d-flex text-secondary small gap-3">
+                <span><i class="bi bi-calendar3"></i> Sep 28, 2024</span>
+                <span><i class="bi bi-clock"></i> 8 min read</span>
+              </div>
+            </div>
+            <img
+              src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=1200&q=80"
+              class="img-fluid rounded mb-5"
+              alt="Blog Header"
+              style="max-height: 500px; width: 100%; object-fit: cover"
+            />
+
+            <div
+              class="text-secondary"
+              style="font-size: 1.1rem; line-height: 1.8"
+            >
+              <p class="text-white">
+                Traditional disk forensics focuses on recovering files from a
+                hard drive. But what happens when malware never touches the
+                disk? Enter Memory Forensics.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">What is Memory Forensics?</h4>
+              <p>
+                Memory forensics is the analysis of volatile data in a
+                computer's memory dump (RAM). It is crucial for identifying
+                fileless malware, rootkits, encryption keys, injected code, and
+                active network connections that exist solely in the computer's
+                memory while powered on.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">The Volatility Framework</h4>
+              <p>
+                The Volatility Framework is the industry standard for memory
+                analysis. It is an open-source collection of tools implemented
+                in Python under the GNU General Public License.
+              </p>
+
+              <h4 class="text-info mt-4 mb-3">Key Artifacts Found in RAM</h4>
+              <ul>
+                <li>
+                  <strong>Running Processes:</strong> Not just what is running,
+                  but the parent-child relationships between processes, which
+                  helps spot anomalies (e.g., cmd.exe spawned by spoolsv.exe).
+                </li>
+                <li>
+                  <strong>Network Connections:</strong> Active TCP/UDP
+                  connections and open ports, providing immediate indicators of
+                  command and control (C2) communication.
+                </li>
+                <li>
+                  <strong>Injected Code:</strong> Identifying VAD (Virtual
+                  Address Descriptor) nodes with PAGE_EXECUTE_READWRITE
+                  permissions which often point to process hollowing or code
+                  injection.
+                </li>
+                <li>
+                  <strong>Credentials:</strong> Passwords in clear text or
+                  password hashes that can be cracked offline.
+                </li>
+              </ul>
+
+              <p class="mt-4">
+                Memory forensics requires a steep learning curve but is an
+                indispensable skill for modern Incident Responders. As attackers
+                continue to develop stealthy, fileless techniques, RAM analysis
+                remains our most powerful magnifying glass.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer
+      class="footer text-center mt-5 pt-5 border-top"
+      style="border-color: rgba(255, 255, 255, 0.1) !important"
+    >
+      <div class="container">
+        <p class="text-secondary small mb-0">
+          &copy; <span id="year"></span> Gul Hassan. All Rights Reserved.
+        </p>
+        <script>
+          document.getElementById("year").textContent =
+            new Date().getFullYear();
+        </script>
+      </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>
